@@ -51,4 +51,4 @@ ignored.
 ### See also ###
 
 [FPDF](FPDF.md), [header](header.md), [footer](footer.md), 
-[set_margins](set_margins.md).
+[set_margins](set_margins.md), [set_page_options](set_page_options.md).

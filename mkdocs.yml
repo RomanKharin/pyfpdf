@@ -59,6 +59,7 @@ pages:
 - ["reference/set_line_width.md", "Reference manual", "set_line_width"]
 - ["reference/set_link.md", "Reference manual", "set_link"]
 - ["reference/set_margins.md", "Reference manual", "set_margins"]
+- ["reference/set_page_options.md", "Reference manual", "set_page_options"]
 - ["reference/set_right_margin.md", "Reference manual", "set_right_margin"]
 - ["reference/set_stretching.md", "Reference manual", "set_stretching"]
 - ["reference/set_subject.md", "Reference manual", "set_subject"]

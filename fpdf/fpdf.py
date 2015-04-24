@@ -229,6 +229,15 @@ class FPDF(object):
         "Keywords of document"
         self.keywords=keywords
 
+    def set_page_options(self, option, value):
+        "Set page options"
+        if option == "rotate":
+            assert value in (0, 90, 180, 270), \
+                "Rotate value must be 0, 90, 180 or 270"
+            self.pages[self.page]["opts"]["rotate"] = value
+        else:
+            raise RuntimeError("Unkown page option '%s'" % option)
+
     def set_creator(self, creator):
         "Creator of document"
         self.creator=creator
@@ -1173,6 +1182,10 @@ class FPDF(object):
             h_pt = self.pages[n]["h_pt"]
             if w_pt != dw_pt or h_pt != dh_pt:
                 self._out(sprintf('/MediaBox [0 0 %.2f %.2f]', w_pt, h_pt))
+            opts = self.pages[n]["opts"]
+            if "rotate" in opts:
+                if opts["rotate"] != 0:
+                    self._out(sprintf('/Rotate %d', opts["rotate"]))
             self._out('/Resources 2 0 R')
             if self.page_links and n in self.page_links:
                 # Links
@@ -1727,6 +1740,12 @@ class FPDF(object):
             self.cur_orientation = orientation
             self.page_break_trigger = self.h - self.b_margin
             self.cur_orientation = orientation
+            self.pages[self.page]["opts"] = {}
+        else:
+            if self.page == 1:
+                self.error("Can't create same page from nothing")
+            self.pages[self.page]["opts"] = self.pages[self.page - 1]["opts"]\
+                .copy()
         self.pages[self.page]["w_pt"] = self.w_pt
         self.pages[self.page]["h_pt"] = self.h_pt
 
